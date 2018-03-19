@@ -1,3 +1,7 @@
+/* * {
+  outline: 1px solid blue;
+} */
+
 body {
   margin: 0;
   padding: 0;
@@ -12,4 +16,5 @@ input.jscolor{
   padding: 5px;
   border: 1px solid #ccc;
   outline: none;
+  margin-bottom: 5px;
 }

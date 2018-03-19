@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const NoteEditorContainer = styled.div`
+    display: flex;
     width: 500px;
     text-align: center;
+    align-self: center;
     position: relative;
 `;
 
@@ -38,19 +40,34 @@ const Button = styled.button`
     text-shadow: 0 0 5px rgba(0,0,0,0.5);
     outline: none;
     cursor: pointer;
+    margin-bottom: 5px;
     &:hover{
       box-shadow:none;
+      background-color: white;
+        color: #408e51;
+        border: 2px solid #408e51;
     }
 `;
 
 class NoteEditor extends Component {
+    constructor(props){
+        super(props);
+        this.color = 'ff6680';
+        this.state = {text: '', color: this.color};
+      }
+      handleChange(e){
+        this.setState({text: e.target.value});
+      }
+      handleChangeColor(e){
+        this.setState({color: e.target.value});
+      }
     render() {
         return (
             <NoteEditorContainer>
-                <TextArea placeholder="Enter your note here..."></TextArea>
+                <TextArea placeholder="Enter your note here..." onChange={this.handleChange.bind(this)}></TextArea>
 
-                <input className="jscolor"/>
-                <Button>add</Button>
+                <input className="jscolor" value={this.state.color} onBlur={this.handleChangeColor.bind(this)}/>
+                <Button onClick={() => this.props.onNoteAdd(this.state.text,this.state.color)}>add</Button>
             </NoteEditorContainer>
         );
     }
