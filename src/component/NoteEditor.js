@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 
 const NoteEditorContainer = styled.div`
@@ -41,33 +41,41 @@ const Button = styled.button`
     outline: none;
     cursor: pointer;
     margin-bottom: 5px;
-    &:hover{
+    &:hover:enabled{
       box-shadow:none;
       background-color: white;
         color: #408e51;
         border: 2px solid #408e51;
     }
+    &:disabled {
+        background: gray;
+        box-shadow:none;
+    }
 `;
 
 class NoteEditor extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.color = 'ff6680';
         this.state = {text: '', color: this.color};
-      }
-      handleChange(e){
+    }
+
+    handleChange(e) {
         this.setState({text: e.target.value});
-      }
-      handleChangeColor(e){
+    }
+
+    handleChangeColor(e) {
         this.setState({color: e.target.value});
-      }
+    }
+
     render() {
         return (
             <NoteEditorContainer>
                 <TextArea placeholder="Enter your note here..." onChange={this.handleChange.bind(this)}></TextArea>
 
                 <input className="jscolor" value={this.state.color} onBlur={this.handleChangeColor.bind(this)}/>
-                <Button onClick={() => this.props.onNoteAdd(this.state.text,this.state.color)}>add</Button>
+                <Button onClick={() => this.props.onNoteAdd(this.state.text, this.state.color)}
+                        disabled={!this.state.text}>add</Button>
             </NoteEditorContainer>
         );
     }
