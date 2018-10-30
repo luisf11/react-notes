@@ -61,6 +61,10 @@ class NoteEditor extends Component {
     }
 
     handleChange(e) {
+        if(e.target.value===''){
+            alert('note can not be empty')
+            return
+        }
         this.setState({text: e.target.value});
     }
 
