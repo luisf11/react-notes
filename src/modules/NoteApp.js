@@ -35,6 +35,9 @@ class NoteApp extends Component {
         console.log('update ls');
       }
       onNoteAdd(noteText, noteColor){
+        if(noteText ===''){
+          alert('note can not be empty')
+        }
         var notesNew = this.state.notes.slice();
         notesNew.unshift({id: Date.now(), text: noteText, color: '#'+noteColor});
         this.setState({notes: notesNew});
